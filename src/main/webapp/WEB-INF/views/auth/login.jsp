@@ -42,6 +42,8 @@
 
         <h4 class="m-0">Welcome back!</h4>
         <p class="mb-5">Login to access your account </p>
+        
+        <p class="mb-5" style="color:red;">${loginfail}</p>
         <form action="<c:url value="<%=UrlConst.AUTH_LOGIN %>" />" method="post">
             <div class="form-group">
                 <label class="text-label" for="email">Email Address:</label>

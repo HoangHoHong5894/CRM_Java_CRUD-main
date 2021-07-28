@@ -1,18 +1,18 @@
 package cyber.java.crmApp.servlet;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import cyber.java.crmApp.dto.UserCreateDto;
 import cyber.java.crmApp.service.AuthService;
+import cyber.java.crmApp.service.UserService;
 import cyber.java.crmApp.util.JspConst;
 import cyber.java.crmApp.util.ServletConst;
 import cyber.java.crmApp.util.UrlConst;
@@ -27,11 +27,13 @@ import cyber.java.crmApp.util.UrlConst;
 })
 public class AuthServlet extends HttpServlet {
 	private AuthService service;
+	private UserService userService;
 	
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		service = new AuthService();
+		userService = new UserService();
 	}
 
 	@Override
@@ -53,11 +55,16 @@ public class AuthServlet extends HttpServlet {
 			// if login alredy -> home page
 			String status = String.valueOf(req.getSession().getAttribute("status"));
 			if(!status.equals("null"))
+			{
 				resp.sendRedirect(req.getContextPath() + UrlConst.HOME);
-			else
-				req.getRequestDispatcher(JspConst.AUTH_LOGIN)
-					.forward(req, resp);
+			}
+			req.getRequestDispatcher(JspConst.AUTH_LOGIN)
+			.forward(req, resp);
 			break;
+		case UrlConst.AUTH_SIGNUP: 
+				req.getRequestDispatcher(JspConst.AUTH_SIGNUP)
+				.forward(req, resp);
+			break;	
 		case UrlConst.AUTH_LOGOUT: 
 			req.getSession().invalidate();
 			resp.sendRedirect(req.getContextPath() + UrlConst.AUTH_LOGIN);
@@ -89,22 +96,52 @@ public class AuthServlet extends HttpServlet {
 			HttpSession currentSession = req.getSession();
 			String pingo = (String)currentSession.getAttribute("pingo");
 			System.out.printf("Pingo: %s\n", pingo);
-			
 			// logic dang nhap
-//			
-//			if(email == null || password == null)// login will fail
-//				isLogin = false;
-////			else if(!email.equals("admin@gmail.com") || !password.equals("1234"))
-//			else if(!service.login(email, password))
-//
-//				isLogin = false;
-//			
+			if(email == null || password == null)// login will fail
+				isLogin = false;
+//			else if(!email.equals("admin@gmail.com") || !password.equals("1234"))
+			else if(!service.login(email, password)) {
+				isLogin = false;
+				req.setAttribute("loginfail", "Invalid UserName or Password, Please check!");
+				req.getRequestDispatcher(JspConst.AUTH_LOGIN)
+				.forward(req, resp);
+			}
+			
 			if(isLogin) {
 				currentSession.setAttribute("status", "Logged in successfully.");
 				resp.sendRedirect(req.getContextPath() + UrlConst.HOME);
 			} else
 				resp.sendRedirect(req.getContextPath() + UrlConst.AUTH_LOGIN);
 			break;
+		case UrlConst.AUTH_SIGNUP: 
+			String nameRegis = req.getParameter("nameSignUp");
+			String emailRegis = req.getParameter("emailSignUp");
+			String passwordRegis = req.getParameter("passwordSignUp");
+			//check email already exist in DB
+			try {
+				boolean isExistDuplicateEmail  = userService.findUserExist(emailRegis);
+				if(!isExistDuplicateEmail)
+				{
+					UserCreateDto user = new UserCreateDto();
+					user.setName(nameRegis);
+					user.setEmail(emailRegis);
+					user.setPassword(passwordRegis);
+					user.setRoleId(2);
+					userService.add(user);
+					resp.sendRedirect(req.getContextPath() + UrlConst.AUTH_LOGIN);
+				}
+				else {
+					System.out.println("User Have already Register!");
+					req.setAttribute("existUser", "Email already exist. Please select another one!");
+					req.getRequestDispatcher(JspConst.AUTH_SIGNUP)
+					.forward(req, resp);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			break;	
 		case UrlConst.AUTH_LOGOUT: 
 			//req.getSession().invalidate();
 			break;	

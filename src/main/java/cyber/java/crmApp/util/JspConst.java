@@ -12,7 +12,9 @@ public class JspConst {
 		public static final String PROJECT_DASHBOARD = "/WEB-INF/views/project/project-dashboard.jsp";
 		public static final String PROJECT_ADD = "/WEB-INF/views/project/project-add.jsp";
 		public static  final String PROJECT_UPDATE = "/WEB-INF/views/project/project-update.jsp";
-		public static final String PROJECT_STAFF = "/WEB-INF/views/project/project-staffs.jsp";
+		public static final String PROJECT_STAFF = "/WEB-INF/views/project/project-staff.jsp";
+		public static final String PROJECT_STAFF_ADD = "/WEB-INF/views/project/project-staff-add.jsp";
+		public static final String PROJECT_STAFF_UPDATE = "/WEB-INF/views/project/project-staff-update.jsp";
 		
 		// ROLE
 		public static final String ROLE_DASHBOARD = "/WEB-INF/views/role/role-dashboard.jsp";

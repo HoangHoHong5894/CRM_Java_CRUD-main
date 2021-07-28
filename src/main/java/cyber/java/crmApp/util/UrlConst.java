@@ -12,6 +12,7 @@ public class UrlConst {
 		
 		// Auth
 		public static final String AUTH_LOGIN 	= "/log-in";
+		public static final String AUTH_LOGIN2 	= "/log-in?isSignUp=true";
 		public static final String AUTH_LOGOUT 	= "/log-out";
 		public static final String AUTH_SIGNUP 	= "/sign-up";
 		public static final String AUTH_FORGOT_PASSWORD = "/forgot-password";
@@ -24,6 +25,7 @@ public class UrlConst {
 		public static final String PROJECT_DELETE = "/project/delete";
 		public static final String PROJECT_STAFF = "/project/staff";
 		public static final String PROJECT_STAFF_ADD = "/project/staff/add";
+		public static final String PROJECT_STAFF_UPDATE = "/project/staff/update";
 		public static final String PROJECT_STAFF_REMOVE = "/project/staff/remove";
 		
 		// Role

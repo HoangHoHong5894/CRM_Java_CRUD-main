@@ -3,6 +3,15 @@
 <%@ page import="cyber.java.crmApp.util.UrlConst" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
+<script type="text/javascript">
+$(document).ready(function() {
+	console.log( "ready!" );
+	 if(${project} !== null )
+	    	$("#owner").val(${project.owner}).change();
+});
+</script>
+
     <head>
 <meta charset="UTF-8">
 <title>Update PROJECT</title>
@@ -63,28 +72,20 @@
                         </div>
                         <div class="form-group">
                             <label for="start_date">Start_Day</label>
-                            <input type="date"  min="1990-01-01" max="2050-12-31" class="form-control" name="start_date" id="start_date">
+                            <input type="date"  min="1990-01-01" max="2050-12-31" class="form-control" name="start_date" id="start_date" value = "${project.start_date}">
                         </div>
                         <div class="form-group">
                             <label for="end_date">End_Day</label>
-                            <input type="date"  min="1990-01-01" max="2050-12-31" class="form-control" name="end_date"" id="end_date">
+                            <input type="date"  min="1990-01-01" max="2050-12-31" class="form-control" name="end_date"" id="end_date" value = "${project.end_date}">
                         </div>
                        
                          <div class="form-group">
                                <label for="owner">Owner</label>
-                              <!--   <select id="owner" name="owner" data-toggle="select" class="form-control">
-                                    <option selected="" value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select> -->
-                               
-                                <select id="owner" name="owner" data-toggle="select" class="form-control">
+                                <select id="owner" name="owner"  data-toggle="select" class="form-control" >
                                  <c:forEach var="user" items="${users}" >
-                                    <option selected="" value="${user.id}">  ${user.name }</option>
-                                  
-                                   </c:forEach>
+                                    <option ${user.id == project.owner? 'selected="true"' : '' } value="${user.id}">${user.name}</option>
+                                 </c:forEach>
                                 </select> 
-                               
                             </div>
                        
                        

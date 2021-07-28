@@ -69,7 +69,98 @@ public class UserDao {
 		
 		return users;
 	}
-
+	
+	public List<User> findListUserById() throws SQLException {
+		List<User> users = new LinkedList<>();
+		List<Role> roles = new ArrayList<>();
+		
+		Connection connection = MySqlConnection.getConnection();
+		String query = "SELECT p.id as project_id, u.id as user_id, u.name as user_name, p.name as project_name,u.email as email,\n"
+				+ "				u.phone as phone,pu.join_date,pu.role_description"
+				+ "				FROM user u, project p, project_user pu WHERE u.id = pu.user_id and p.id = pu.project_id";
+		  
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				User user = new User();
+				
+				user.setId(resultSet.getInt("id"));
+				user.setName(resultSet.getString("name"));
+				user.setEmail(resultSet.getString("email"));
+				user.setPhone(resultSet.getString("phone"));
+				// role_id
+				int roleId = resultSet.getInt("role_id");
+				// role
+				Role role = getRoleFromList(roles, roleId);
+				
+				if(role == null) {
+					role = new Role();
+					role.setId(resultSet.getInt("role_id"));
+					role.setName(resultSet.getString("role_name"));
+					role.setDescription(resultSet.getString("role_description"));
+					
+					roles.add(role);
+				}
+				
+				user.setRole(role);
+				
+				users.add(user);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to database.");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+		
+		return users;
+	}
+	
+	
+	public User findUserById(int id) throws SQLException {
+		User user = new User();
+		Role role = new Role();
+		
+		Connection connection = MySqlConnection.getConnection();
+		String query = "SELECT u.id as id, u.name as name, u.email as email,"
+				+ "	u.phone as phone, r.id as role_id, r.name as role_name, r.description as role_description "
+				+ "	FROM user u, role r WHERE u.role_id = r.id and u.id = ?";
+		  
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				user.setId(resultSet.getInt("id"));
+				user.setName(resultSet.getString("name"));
+				user.setEmail(resultSet.getString("email"));
+				user.setPhone(resultSet.getString("phone"));
+				// role_id
+				int roleId = resultSet.getInt("role_id");
+				role.setId(roleId);
+				user.setRole(role);
+			}
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to database.");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+		
+		return user;
+	}
+	
+//	public boolean findUserExist(List<User> users, String email)
+//	{
+//		for(User user : users)
+//			if(user.getEmail() == email)
+//				return false;
+//		return true;
+//	}
 	public void deleteById(int id) throws SQLException {
 		String query = "DELETE FROM user WHERE id = ?";
 		Connection connection = MySqlConnection.getConnection();
@@ -152,6 +243,55 @@ public class UserDao {
 		
 	}
 
+	public List<User> findAllUserNoPJ() throws SQLException {
+		List<User> users = new LinkedList<>();
+		List<Role> roles = new ArrayList<>();
+		
+		Connection connection = MySqlConnection.getConnection();
+		String query = "SELECT u.id as id, u.name as name, u.email as email,"
+				+ " u.phone as phone, r.id as role_id, r.name as role_name, r.description as role_description "
+				+ " FROM user u, role r WHERE u.role_id = r.id and u.id not in (select user_id from project_user)";
+		  
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				User user = new User();
+				
+				user.setId(resultSet.getInt("id"));
+				user.setName(resultSet.getString("name"));
+				user.setEmail(resultSet.getString("email"));
+				user.setPhone(resultSet.getString("phone"));
+				// role_id
+				int roleId = resultSet.getInt("role_id");
+				// role
+				Role role = getRoleFromList(roles, roleId);
+				
+				if(role == null) {
+					role = new Role();
+					role.setId(resultSet.getInt("role_id"));
+					role.setName(resultSet.getString("role_name"));
+					role.setDescription(resultSet.getString("role_description"));
+					
+					roles.add(role);
+				}
+				
+				user.setRole(role);
+				
+				users.add(user);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to database.");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+		
+		return users;
+	}
 	
 
 	

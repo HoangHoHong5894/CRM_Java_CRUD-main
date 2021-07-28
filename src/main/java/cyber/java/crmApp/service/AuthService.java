@@ -21,41 +21,18 @@ public class AuthService {
 		dao = new AuthDao();
 	}
 
-//	public boolean login(String email, String password) {
-//		UserLoginDto dto = null;
-//		
-//		try {
-//			dto = dao.findUserLogin(email);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//		
-//		if(dto == null)
-//			return false;
-//		
-//		return BCrypt.checkpw(password, dto.getPassword());
-//	}
-//	
-//}
-
-public UserLoginDto login(String email, String password) {
+	public boolean login(String username,String password)
+	{
+		UserLoginDto dto = null;
 		
 		try {
-			String query = "SELECT email, password FROM user email=? and password =?";
-			Connection connection = MySqlConnection.getConnection();
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, email);
-			statement.setString(2, password);
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				UserLoginDto account = new UserLoginDto(result.getString(1), result.getString(2));
-				return account;
-			}
-			
-		} catch (Exception e) {
+			dto = dao.findUserLogin(username);
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
-		return null;
+		}
+		if(dto == null)
+			return false;
+		
+		return BCrypt.checkpw(password, dto.getPassword());
 	}
 }

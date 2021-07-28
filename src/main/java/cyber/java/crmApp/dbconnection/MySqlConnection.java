@@ -8,9 +8,9 @@ public class MySqlConnection {
 	
 private static Connection connection = null;
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/crm";
+	private static final String URL = "jdbc:mysql://localhost:3308/crm";
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "Kenneth93";
+	private static final String PASSWORD = "1234";
 	
 	public static Connection getConnection() {
 		try {

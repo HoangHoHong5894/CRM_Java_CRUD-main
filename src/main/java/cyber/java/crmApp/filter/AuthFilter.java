@@ -26,7 +26,7 @@ public class AuthFilter implements Filter{
 		
 		String servletPath = req.getServletPath();
 		
-		if(servletPath.startsWith(UrlConst.ASSETS) || servletPath.startsWith(UrlConst.AUTH_LOGIN))
+		if(servletPath.startsWith(UrlConst.ASSETS) || servletPath.startsWith(UrlConst.AUTH_LOGIN) || servletPath.startsWith(UrlConst.AUTH_SIGNUP))
 			chain.doFilter(request, response);
 		else {
 			String status = String.valueOf(req.getSession().getAttribute("status"));

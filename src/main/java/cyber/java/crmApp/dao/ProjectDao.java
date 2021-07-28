@@ -1,6 +1,7 @@
 package cyber.java.crmApp.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,8 +34,8 @@ public class ProjectDao {
 				project.setId(resultSet.getInt("id"));
 				project.setName(resultSet.getString("name"));
 				project.setDescription(resultSet.getString("description"));
-				project.setStart_date(resultSet.getString("start_date"));
-				project.setEnd_date(resultSet.getString("end_date"));
+				project.setStart_date(resultSet.getDate("start_date"));
+				project.setEnd_date(resultSet.getDate("end_date"));
 				
 				int owner_Id = resultSet.getInt("owner");
 				project.setOwner(owner_Id);
@@ -122,8 +123,8 @@ public void update(ProjectDto projectdto) throws SQLException {
 			
 			statement.setNString(1, projectdto.getName());
 			statement.setNString(2, projectdto.getDescription());
-			statement.setNString(3, projectdto.getStart_date().toString());
-			statement.setNString(4, projectdto.getEnd_date().toString());
+			statement.setDate(3, projectdto.getStart_date());
+			statement.setDate(4, (Date) projectdto.getEnd_date());
 			statement.setInt(5, projectdto.getOwner());
 			statement.setInt(6,projectdto.getId());
 			statement.executeUpdate();
@@ -154,8 +155,8 @@ public Project findById(int id) {
 			project.setId(resultSet.getInt("id"));
 			project.setName(resultSet.getString("name"));
 			project.setDescription(resultSet.getString("description"));
-			project.setStart_date(resultSet.getString("start_date"));
-			project.setEnd_date(resultSet.getString("end_date"));
+			project.setStart_date(resultSet.getDate("start_date"));
+			project.setEnd_date(resultSet.getDate("end_date"));
 			project.setOwner(resultSet.getInt("owner"));
 			
 		}

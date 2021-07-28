@@ -27,6 +27,26 @@ private UserDao dao;
 		}
 		return users;
 	}
+	
+	public User findUserById(int id) {
+		User users = new User();
+		try {
+			users = dao.findUserById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public List<User> findListUserByID() {
+		List<User> users = null;
+		try {
+			users = dao.findAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
 
 	public void deleteById(int id) {
 		try {
@@ -34,6 +54,22 @@ private UserDao dao;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean findUserExist( String email) throws SQLException
+	{
+		boolean exist = false;
+		List<User> users = null;
+		users = dao.findAll();
+		for(User user : users)
+		{
+			if(user.getEmail().equalsIgnoreCase(email))
+			{
+				exist = true;
+				return exist;
+			}
+		}
+		return exist;
 	}
 
 	public void add(UserCreateDto dto) {
@@ -57,6 +93,16 @@ private UserDao dao;
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public List<User> findAllUserNoPJ() {
+		List<User> users = null;
+		try {
+			users = dao.findAllUserNoPJ();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
 	}
 
 }

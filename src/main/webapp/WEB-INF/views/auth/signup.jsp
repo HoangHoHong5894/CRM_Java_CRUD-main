@@ -43,12 +43,13 @@
 
         <h4 class="m-0">Sign up!</h4>
         <p class="mb-5">Create an account now</p>
+        <p class="mb-5" style="color:red;">${existUser}</p>
 
         <form action="<c:url value="<%=UrlConst.AUTH_SIGNUP %>" />" method="post">
             <div class="form-group">
                 <label class="text-label" for="name_2">Name:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name_2" type="text" required="" class="form-control form-control-prepended" placeholder="John Doe">
+                    <input id="nameSignUp" name = "nameSignUp" type="text" required="" class="form-control form-control-prepended" placeholder="John Doe">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-user"></span>
@@ -59,7 +60,7 @@
             <div class="form-group">
                 <label class="text-label" for="email_2">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="email_2" type="email" required="" class="form-control form-control-prepended" placeholder="john@doe.com">
+                    <input id="emailSignUp" type="email" name = "emailSignUp" required="" class="form-control form-control-prepended" placeholder="john@doe.com">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
@@ -70,7 +71,7 @@
             <div class="form-group">
                 <label class="text-label" for="password_2">Password:</label>
                 <div class="input-group input-group-merge">
-                    <input id="password_2" type="password" required="" class="form-control form-control-prepended" placeholder="Enter your password">
+                    <input id="passwordSignUp" name = "passwordSignUp" type="password" required="" class="form-control form-control-prepended" placeholder="Enter your password">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-key"></span>

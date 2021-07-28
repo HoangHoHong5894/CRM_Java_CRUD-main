@@ -30,6 +30,11 @@
 	    			</a>
 	            </div>
 	            
+	            <div class="ml-auto">
+	                <a href="<c:url value="<%=UrlConst.PROJECT_STAFF_ADD %>" />" class="btn btn-light"><i class="material-icons icon-16pt text-muted mr-1">add</i>
+	    				Add Staff For Project
+	    			</a>
+	            </div>
 	        </div>
 	    </div>
 	</div>
@@ -66,7 +71,7 @@
 		                           
 		                         <%--   <td><span class="badge badge-primary">${user.role.name }</span></td> --%>
 		                           <td>
-		                           ${project.description }
+		                           	${project.description }
 		                           </td>
 		                           <td>
 		                               ${project.start_date }
@@ -86,6 +91,7 @@
 		                           	
 		                           	<a href="<c:url value="<%=UrlConst.PROJECT_UPDATE%>" />?id=${project.id}" class="text-muted"><i class="material-icons">update</i></a>
 		                           	<a href="<c:url value="<%=UrlConst.PROJECT_DELETE%>" />?id=${project.id}" class="text-muted"><i class="material-icons">delete</i></a>
+		                           	<a href="<c:url value="<%=UrlConst.PROJECT_STAFF%>" />?id=${project.id}" class="text-muted"><i class="material-icons">info</i></a>
 		                           </td>
 	                    		</tr>
                  			</c:forEach>
