@@ -250,7 +250,7 @@ public class UserDao {
 		Connection connection = MySqlConnection.getConnection();
 		String query = "SELECT u.id as id, u.name as name, u.email as email,"
 				+ " u.phone as phone, r.id as role_id, r.name as role_name, r.description as role_description "
-				+ " FROM user u, role r WHERE u.role_id = r.id and u.id not in (select user_id from project_user)";
+				+ " FROM user u, role r WHERE u.role_id = r.id and u.id not in (select user_id from project_user) and r.id<>1";
 		  
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);

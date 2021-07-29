@@ -67,15 +67,15 @@
                         <div class="form-group">
                                 <label for="role">Role</label>
                                 <select id="role" name="role" data-toggle="select" readonly class="form-control" > 
-                                    <option ${role.id == 1? 'selected="true"' : '' } value="1">ADMIN</option>
+                                    <%-- <option ${role.id == 1? 'selected="true"' : '' } value="1">ADMIN</option> --%>
                                     <option ${role.id == 2? 'selected="true"' : '' } value="2">USER</option>
                                     <option ${role.id == 3? 'selected="true"' : '' } value="3">LEADER</option>
                                     <option ${role.id == 4? 'selected="true"' : '' } value="4">STAFF</option>
                                 </select>
                             </div>
                         <div class="form-group">
-                               <label for="owner">Project</label>
-                                <select id="owner" name="owner"  data-toggle="select" class="form-control" >
+                               <label for="project">Project</label>
+                                <select id="project" name="project"  data-toggle="select" class="form-control" >
                                  <c:forEach var="project" items="${projects}" >
                                     <option  value="${project.id}">${project.name}</option>
                                  </c:forEach>

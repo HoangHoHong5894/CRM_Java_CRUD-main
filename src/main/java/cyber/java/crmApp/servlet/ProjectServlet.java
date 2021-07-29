@@ -17,9 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import cyber.java.crmApp.dto.ProjectDto;
 import cyber.java.crmApp.model.Project;
 import cyber.java.crmApp.model.Project_User;
+import cyber.java.crmApp.model.Role;
 import cyber.java.crmApp.model.User;
 import cyber.java.crmApp.service.ProjectService;
 import cyber.java.crmApp.service.ProjectUserService;
+import cyber.java.crmApp.service.RoleService;
 import cyber.java.crmApp.service.UserService;
 import cyber.java.crmApp.util.JspConst;
 import cyber.java.crmApp.util.UrlConst;
@@ -39,6 +41,7 @@ import cyber.java.crmApp.util.UrlConst;
 public class ProjectServlet extends HttpServlet{
 private ProjectService service;
 private UserService userService;
+private RoleService roleService;
 private ProjectUserService projectUserService;
 	
 	@Override
@@ -46,8 +49,8 @@ private ProjectUserService projectUserService;
 		super.init();
 		service = new ProjectService();
 		userService = new UserService();
+		roleService = new RoleService();
 		projectUserService = new ProjectUserService();
-		
 	}
 
 	@Override
@@ -146,7 +149,7 @@ private ProjectUserService projectUserService;
 			
 			break;
 		case UrlConst.PROJECT_STAFF_UPDATE:
-			postRemoveProjectStaffUpdate(req, resp);
+			postProjectStaffUpdate(req, resp);
 			break;
 		case UrlConst.PROJECT_STAFF_REMOVE:
 			postRemoveProjectStaff(req,resp);
@@ -160,14 +163,16 @@ private ProjectUserService projectUserService;
 
 
 
-	private void postRemoveProjectStaffUpdate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	private void postProjectStaffUpdate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Project_User projectUserAdd = new Project_User();
-		int projectId = Integer.parseInt(req.getParameter("project_id"));
+		int projectId = Integer.parseInt(req.getParameter("project"));
 		int userId = Integer.parseInt(req.getParameter("id"));
-//		int roleId = Integer.parseInt(req.getParameter("role"));
+		int roleId = Integer.parseInt(req.getParameter("role"));
+		
+		Role role = roleService.findById(roleId);
 		projectUserAdd.setProject_id(projectId);
 		projectUserAdd.setUser_id(userId);
-//		projectUserAdd.setRole_description(roleId);
+		projectUserAdd.setRole_description(role.getName());
 		projectUserService.add(projectUserAdd);
 		resp.sendRedirect(req.getContextPath() + UrlConst.PROJECT_STAFF_ADD);
 	}

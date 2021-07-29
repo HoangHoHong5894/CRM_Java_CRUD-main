@@ -22,6 +22,10 @@ public class JspConst {
 		public static final String ROLE_UPDATE = "/WEB-INF/views/role/role-update.jsp";
 		
 		// TASK
+//		public static final String TASK_DASHBOARD = "/WEB-INF/views/task/task-dashboard.jsp";
+//		public static final String TASK_ADD = "/WEB-INF/views/task/task-add.jsp";
+//		public static final String TASK_UPDATE = "/WEB-INF/views/task/task-update.jsp";
+		// TASK
 		public static final String TASK_DASHBOARD = "/WEB-INF/views/task/task-dashboard.jsp";
 		public static final String TASK_ADD = "/WEB-INF/views/task/task-add.jsp";
 		public static final String TASK_UPDATE = "/WEB-INF/views/task/task-update.jsp";
