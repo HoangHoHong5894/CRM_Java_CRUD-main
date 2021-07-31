@@ -18,11 +18,11 @@
 	                        <li class="breadcrumb-item"><a href="<c:url value="<%=UrlConst.HOME %>" />">Home</a></li>
 	                        <li class="breadcrumb-item"><a href="<c:url value="<%=UrlConst.USER_DASHBOARD %>" />">User</a></li>
 	                        <li class="breadcrumb-item active" aria-current="page">
-	                         Update User
+	                         Edit User Profile
 	                        </li>
 	                    </ol>
 	                </nav>
-	                <h1 class="m-0">UpDate User</h1>
+	                <h1 class="m-0">Edit User</h1>
 	            </div>
 	        </div>
 	    </div>
@@ -36,7 +36,7 @@
                     <p class="text-muted">There is no rule!</p>
                 </div>
                 <div class="col-lg-8 card-form__body card-body">
-                    <form action="<c:url value="<%=UrlConst.USER_UPDATE %>" />" method="post">
+                    <form action="<c:url value="<%=UrlConst.USER_EDIT %>" />" method="post">
                    
                     <div class="form-group">
           <label class="fst-italic" for="code">Code</label>
@@ -46,7 +46,7 @@
             name="id"
             id="id"
         
-            value="${user.id }"
+            value="${user.id}"
             readonly
           />
         </div>
@@ -55,10 +55,10 @@
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" name="email" id="email"  value="${user.email}">
                         </div>
-<%--                         <div class="form-group">
+                        <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" name="password" id="password" value="${user.password}">
-                        </div> --%>
+                        </div>
                         <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" name="name" id="name" value="${user.name}">
@@ -67,20 +67,24 @@
                             <label for="phone">Phone:</label>
                             <input type="text" class="form-control" name="phone" id="phone" value="${user.phone}">
                         </div>
-                         <div class="form-group">
+<%--                          <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input style = "height:100px;" type="text" class="form-control" name="address" id="address" value="${user.address}" ></input>
+                        </div> --%>
+                        
+                        <div class="form-group">
                             <label for="address">Address:</label>
                             <input type="text" class="form-control" name="address" id="address" value="${user.address}">
                             <!-- <textarea type="text" class="form-control" name="address" id="address" aria-label="With textarea"></textarea> -->
                         </div>
-                        <div class="form-group">
+<!--                         <div class="form-group">
                                 <label for="role">Role</label>
                                 <select id="role" name="role" data-toggle="select" class="form-control">
-                                    <option ${user.role.id == 1? 'selected="true"' : '' } value="1">ADMIN</option>
-                                    <option ${user.role.id == 2? 'selected="true"' : '' } value="2">USER</option>
-                                    <option ${user.role.id == 3? 'selected="true"' : '' } value="3">LEADER</option>
-                                    <option ${user.role.id == 4? 'selected="true"' : '' } value="4">STAFF</option>
+                                    <option selected="" value="1">ADMIN</option>
+                                    <option value="2">LEADER</option>
+                                    <option value="3">STAFF</option>
                                 </select>
-                            </div>
+                            </div> -->
                         <button class="btn btn-primary w-25 justify-content-center" type="submit" class="btn btn-primary">UpDate</button>
                     </form>
                 </div>

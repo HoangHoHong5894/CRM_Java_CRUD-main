@@ -108,6 +108,7 @@ public class AuthServlet extends HttpServlet {
 			}
 			
 			if(isLogin) {
+				currentSession.setAttribute("email", email);
 				currentSession.setAttribute("status", "Logged in successfully.");
 				resp.sendRedirect(req.getContextPath() + UrlConst.HOME);
 			} else

@@ -20,10 +20,12 @@ import java.util.List;
 
 @WebServlet(name = "userServlet", urlPatterns = {
 		UrlConst.USER_DASHBOARD,
-		UrlConst.USER_PROFILE,
+//		UrlConst.USER_PROFILE,
 		UrlConst.USER_ADD,
 		UrlConst.USER_UPDATE,
-		UrlConst.USER_DELETE
+		UrlConst.USER_DELETE,
+		UrlConst.USER_SEARCH
+//		UrlConst.PROJECT_STAFF_ADD
 })
 public class UserServlet extends HttpServlet {
 	private UserService service;
@@ -40,9 +42,9 @@ public class UserServlet extends HttpServlet {
 		case UrlConst.USER_DASHBOARD:
 			getUserDashboard(req,resp);
 			break;
-		case UrlConst.USER_PROFILE:
-			getUserProfile(req,resp);
-			break;
+//		case UrlConst.USER_PROFILE:
+//			getUserProfile(req,resp);
+//			break;
 		case UrlConst.USER_ADD:
 			getUserAdd(req,resp);
 			break;
@@ -61,14 +63,17 @@ public class UserServlet extends HttpServlet {
 		case UrlConst.USER_DASHBOARD:
 			
 			break;
-		case UrlConst.USER_PROFILE:
-			
-			break;
+//		case UrlConst.USER_PROFILE:
+//			
+//			break;
 		case UrlConst.USER_ADD:
 			postUserAdd(req,resp);
 			break;
 		case UrlConst.USER_UPDATE:
 			postUserUpdate(req,resp);
+			break;
+		case UrlConst.USER_SEARCH:
+			postUserSearch(req,resp);
 			break;
 		case UrlConst.USER_DELETE:
 			
@@ -77,6 +82,18 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	
+
+	private void postUserSearch(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		String emailSearch = req.getParameter("search");
+		List<User> userNoPJ = service.findAllUserNoPJ(emailSearch);
+		if(userNoPJ != null && !userNoPJ.isEmpty())
+			req.setAttribute("userNoPJ", userNoPJ);
+		req.getRequestDispatcher(JspConst.PROJECT_STAFF_ADD)
+			.forward(req, resp);
+//		UserCreateDto dto = extractDtoFromReq(req);
+//		service.add(dto);
+//		resp.sendRedirect(req.getContextPath() + UrlConst.PROJECT_STAFF_ADD);
+	}
 
 	private void getUserDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
@@ -88,10 +105,12 @@ public class UserServlet extends HttpServlet {
 
 	private void getUserUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
-		UserCreateDto userDto = new UserCreateDto();
-		userDto.setId(id);
+//		UserCreateDto userDto = new UserCreateDto();
+//		userDto.setId(id);
+		User user = service.findUserByID(id);
+//		UserCreateDto userDto = extractDtoFromReq(req);
 		
-		req.setAttribute("user", userDto);
+		req.setAttribute("user", user);
 		req.getRequestDispatcher(JspConst.USER_UPDATE)
 			.forward(req, resp);
 		
@@ -103,10 +122,10 @@ public class UserServlet extends HttpServlet {
 			.forward(req, resp);
 	}
 
-	private void getUserProfile(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-		
-	}
+//	private void getUserProfile(HttpServletRequest req, HttpServletResponse resp) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	private void getUserDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<User> users = service.findAll();

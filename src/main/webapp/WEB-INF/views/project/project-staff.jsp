@@ -85,7 +85,7 @@
 <!-- 		                           	<a href="" class="text-muted"><i class="material-icons">settings</i></a>
  -->		                       
 		                           	
-		                           	<a href="<c:url value="<%=UrlConst.PROJECT_STAFF_UPDATE%>" />?id=${project.id}" class="text-muted"><i class="material-icons">update</i></a>
+		                           	<%-- <a href="<c:url value="<%=UrlConst.PROJECT_STAFF_UPDATE%>" />?id=${project.id}" class="text-muted"><i class="material-icons">update</i></a> --%>
 		                           	<a href="<c:url value="<%=UrlConst.PROJECT_STAFF_REMOVE%>" />?project_id=${projectuser.project_id}&user_id=${projectuser.user_id}" class="text-muted"><i class="material-icons">delete</i></a>
 		                           	<%-- <a href="<c:url value="<%=UrlConst.PROJECT_STAFF%>" />?id=${project.id}" class="text-muted"><i class="material-icons">info</i></a>  --%>
 		                           </td>

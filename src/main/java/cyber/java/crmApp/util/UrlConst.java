@@ -44,6 +44,7 @@ public class UrlConst {
 		public static final String USER_PROFILE = "/user/profile";
 		public static final String USER_DASHBOARD = "/user";
 		public static final String USER_ADD	= "/user/add";
+		public static final String USER_SEARCH	= "/user/search";
 		public static final String USER_UPDATE 	= "/user/update";
 		public static final String USER_DELETE 	= "/user/delete";
 		public static final String USER_EDIT = "/user/edit";

@@ -47,7 +47,7 @@
 	                     <th>Project Name</th>
 	                     <th>Task Project Name</th>
 	                     <th>Task User Name</th>
-	                     <th>Task Description</th>
+	                     <th>Task Status</th>
 	                     <th>Task Start Day</th>
 	                     <th>Task End Day</th>
 	                     <th>UpDate/Delete</th>
@@ -68,7 +68,7 @@
 		                            <td> ${task.name}</td>
 		                             <td> ${task.project.name}</td>		                     
 		                               <td> ${task.user.name}</td>
-		                                <td> ${task.description}</td>
+		                                <td> ${task.status.name}</td>
 		                                <td> ${task.start_date}</td>
 		                                 <td> ${task.end_date}</td>
 		                         <%--   <td><span class="badge badge-primary">${task.user.name }</span></td> --%>

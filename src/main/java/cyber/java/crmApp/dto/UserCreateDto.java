@@ -29,6 +29,14 @@ public class UserCreateDto {
 		this.id = id;
 	}
 	
+	public UserCreateDto(String email, String name, String address, String phone, int id) {
+		this.email = email;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.id = id;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

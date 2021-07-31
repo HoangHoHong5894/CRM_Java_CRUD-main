@@ -38,10 +38,30 @@ private UserDao dao;
 		return users;
 	}
 	
+	public User findUserByEmail(String email) {
+		User users = new User();
+		try {
+			users = dao.findUserByEmail(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
 	public List<User> findListUserByID() {
 		List<User> users = null;
 		try {
 			users = dao.findAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public User findUserByID(int id) {
+		User users = null;
+		try {
+			users = dao.findUserById(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -95,10 +115,29 @@ private UserDao dao;
 		
 	}
 	
+	public void updateProfile(UserCreateDto dto) {
+		try {
+			dao.updateProfile(dto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public List<User> findAllUserNoPJ() {
 		List<User> users = null;
 		try {
 			users = dao.findAllUserNoPJ();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	public List<User> findAllUserNoPJ(String email) {
+		List<User> users = null;
+		try {
+			users = dao.searchUserNoPJ(email);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

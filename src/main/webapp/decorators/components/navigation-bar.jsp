@@ -28,7 +28,7 @@
                             <a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_ADD %>" />">
                                 Create New Project
                             </a>
-                            <a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_STAFF %>" />">
+                            <a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_STAFF_ADD %>" />">
                                 Project Staffs
                             </a>
                         </div>

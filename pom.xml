@@ -46,6 +46,19 @@
 	    <artifactId>jbcrypt</artifactId>
 	    <version>0.4</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/displaytag/displaytag -->
+	<dependency>
+	    <groupId>displaytag</groupId>
+	    <artifactId>displaytag</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/displaytag/displaytag-export-poi -->
+	<dependency>
+	    <groupId>displaytag</groupId>
+	    <artifactId>displaytag-export-poi</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	
 
   </dependencies>
   

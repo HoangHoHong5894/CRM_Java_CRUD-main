@@ -62,7 +62,7 @@ $(document).ready(function() {
         
                      
                        
-                           <div class="form-group">
+                        <div class="form-group">
                             <label for="name">Name</label>
                              <input type="text" class="form-control" name="name" id="name"    value="${project.name }">
                         </div>
